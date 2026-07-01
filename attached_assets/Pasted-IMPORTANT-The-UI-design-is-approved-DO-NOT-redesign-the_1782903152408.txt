@@ -1,0 +1,136 @@
+IMPORTANT: The UI design is approved.
+
+DO NOT redesign the website.
+
+DO NOT change the layout, colors, typography, animations or premium appearance.
+
+The priority now is FUNCTIONALITY.
+
+Currently, many calculators are only visual and do not perform real calculations.
+
+I need AI Money Hub to become a fully working financial platform.
+
+For every calculator:
+
+- Implement real mathematical formulas.
+- Results must update instantly as users type.
+- Validate all inputs.
+- Prevent invalid values.
+- Show error messages when necessary.
+- Display calculations in real time without page reload.
+- Include reset and clear buttons.
+- Allow decimal values where appropriate.
+- Format currencies automatically.
+- Format percentages correctly.
+- Make all calculations mobile friendly.
+
+Examples:
+
+Salary Calculator
+- Gross salary
+- Tax deduction
+- Insurance
+- Net salary
+- Monthly and yearly breakdown
+
+Compound Interest Calculator
+- Principal
+- Interest rate
+- Time
+- Monthly contribution
+- Final value
+- Total interest earned
+- Interactive growth chart
+
+Mortgage Calculator
+- Home price
+- Deposit
+- Interest rate
+- Loan term
+- Monthly payment
+- Total interest
+- Total repayment
+
+Loan Calculator
+- Loan amount
+- Interest
+- Duration
+- Monthly payment
+- Amortization summary
+
+ROI Calculator
+- Investment
+- Profit
+- ROI percentage
+
+Profit Margin Calculator
+- Revenue
+- Costs
+- Net profit
+- Margin %
+
+TikTok Earnings Calculator
+- Estimated views
+- CPM range
+- Estimated revenue
+
+YouTube Revenue Calculator
+- Views
+- RPM
+- Estimated earnings
+
+Affiliate Profit Calculator
+- Product price
+- Commission percentage
+- Sales volume
+- Total earnings
+
+Every calculator should include:
+- Live calculation
+- Animated result cards
+- Progress visualization
+- Charts when applicable
+- Export to PDF
+- Copy results
+- Print results
+- Share results
+
+DATA PAGE
+
+Create a dedicated "Market Data" page.
+
+This page should include:
+
+- Currency exchange rates
+- Inflation indicators
+- Major stock indices
+- Gold price
+- Silver price
+- Oil price
+- Bitcoin price
+- Ethereum price
+- Interest rates
+- Economic indicators
+
+Display data in beautiful cards and interactive charts.
+
+Add a search function.
+
+Add automatic refresh capability where supported.
+
+DASHBOARD
+
+Create a central dashboard showing:
+
+- Most used calculators
+- Recently used tools
+- Favorite calculators
+- Trending financial tools
+
+PERFORMANCE
+
+Keep everything extremely fast.
+
+Maintain the premium luxury design while making the platform fully interactive and functional.
+
+The goal is to transform AI Money Hub from a beautiful showcase into a professional financial application that users can rely on every day.
