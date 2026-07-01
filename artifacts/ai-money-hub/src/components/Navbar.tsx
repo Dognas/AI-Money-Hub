@@ -9,6 +9,7 @@ export default function Navbar() {
     { href: "/", label: "Calculators" },
     { href: "/market", label: "Market Data" },
     { href: "/dashboard", label: "Dashboard" },
+    { href: "/coach", label: "🤖 AI Coach" },
   ];
 
   return (

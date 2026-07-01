@@ -163,6 +163,18 @@ function HomeContent() {
               </Link>
             </div>
 
+            {/* AI Coach Banner */}
+            <div className={`max-w-3xl mx-auto mb-8 rounded-2xl border-2 border-emerald-400/40 p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 ${dark ? "bg-emerald-950/20" : "bg-emerald-50"}`}>
+              <div className="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center text-2xl btn-gradient shadow-lg">🤖</div>
+              <div className="flex-1 text-center sm:text-left">
+                <p className={`font-black text-base ${dark ? "text-white" : "text-gray-900"}`}>New: Daily AI Financial Coach</p>
+                <p className={`text-sm ${dark ? "text-gray-400" : "text-gray-600"}`}>Answer 8 quick questions → get your Financial Health Score + personalised action plan</p>
+              </div>
+              <Link href="/coach" className="flex-shrink-0 inline-flex items-center gap-2 text-white font-bold px-5 py-2.5 rounded-xl text-sm btn-gradient hover:opacity-90 transition-all whitespace-nowrap">
+                Try AI Coach →
+              </Link>
+            </div>
+
             {/* Dashboard Preview */}
             <div className={`rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden max-w-4xl mx-auto ${dark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}`}>
               <div className={`flex items-center gap-2 px-4 sm:px-5 py-3 border-b ${dark ? "border-gray-800 bg-gray-900" : "border-gray-100 bg-gray-50"}`}>
