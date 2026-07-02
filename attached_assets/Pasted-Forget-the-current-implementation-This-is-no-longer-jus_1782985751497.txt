@@ -1,0 +1,386 @@
+Forget the current implementation.
+
+This is no longer just a financial calculator website.
+
+Transform AI Money97 into a complete AI-powered financial platform with enterprise-level architecture, premium UX, secure authentication, persistent cloud database, intelligent AI assistant, and professional financial calculation engine.
+
+========================================
+MISSION
+========================================
+
+Build a world-class financial platform where users create an account, save their financial profile, access advanced calculators, receive AI-powered recommendations, monitor their progress over time, and securely store all their financial data.
+
+The application must feel like premium software used by banks, fintech companies, and financial advisors.
+
+Think:
+
+• Copilot Money
+• Monarch Money
+• Bloomberg
+• Stripe Dashboard
+• Apple
+• Revolut
+• Wealthfront
+• Rocket Money
+
+========================================
+USER AUTHENTICATION
+========================================
+
+Create a complete authentication system.
+
+Include:
+
+• Sign Up
+• Sign In
+• Forgot Password
+• Email Verification
+• Password Reset
+• Remember Me
+• Secure Session Management
+• Logout
+
+Allow login with:
+
+• Google
+• Apple
+• Microsoft
+• Email
+
+Use encrypted authentication.
+
+========================================
+DATABASE
+========================================
+
+Connect every calculator to a real database.
+
+Store permanently:
+
+User Profile
+
+Age
+
+Country
+
+Salary
+
+Monthly Expenses
+
+Savings
+
+Debt
+
+Investments
+
+Retirement Goals
+
+Financial Goals
+
+Net Worth History
+
+Calculator History
+
+AI Recommendations
+
+Achievements
+
+Notifications
+
+User Preferences
+
+Theme
+
+Language
+
+Everything must persist after logout.
+
+========================================
+SMART CALCULATORS
+========================================
+
+Every calculator must become a professional financial engine.
+
+Never return static results.
+
+Every calculation should include:
+
+Detailed breakdown
+
+Interactive charts
+
+Financial explanations
+
+Risk analysis
+
+Recommendations
+
+Future projections
+
+Alternative scenarios
+
+Savings opportunities
+
+AI insights
+
+Each calculator must save results automatically inside the user dashboard.
+
+========================================
+MONEY JOURNEY
+========================================
+
+Create an AI Financial Journey.
+
+Step 1
+
+Collect:
+
+Age
+
+Country
+
+Income
+
+Monthly Expenses
+
+Debt
+
+Savings
+
+Assets
+
+Investment Experience
+
+Risk Tolerance
+
+Financial Goal
+
+Step 2
+
+Generate:
+
+Financial Health Score
+
+Investment Readiness
+
+Emergency Fund Score
+
+Debt Score
+
+Savings Score
+
+Retirement Readiness
+
+Monthly Financial Report
+
+Personal Action Plan
+
+Step 3
+
+Generate an interactive roadmap showing how the user can improve over time.
+
+========================================
+AI FINANCIAL ADVISOR
+========================================
+
+Create Money97 AI™
+
+This is not a simple chatbot.
+
+It behaves like a professional financial coach.
+
+Capabilities:
+
+Explain calculations
+
+Answer finance questions
+
+Recommend calculators
+
+Analyze user profile
+
+Suggest monthly savings
+
+Suggest investments
+
+Identify unnecessary expenses
+
+Motivate users
+
+Provide financial education
+
+Generate weekly reports
+
+Generate monthly summaries
+
+Remember previous conversations
+
+Context-aware responses
+
+Natural language conversations
+
+Beautiful typing animation
+
+Voice animation
+
+Premium glass interface
+
+Open automatically on first visit
+
+Minimize elegantly
+
+========================================
+DASHBOARD
+========================================
+
+Create a luxury financial dashboard.
+
+Show:
+
+Net Worth
+
+Monthly Income
+
+Savings
+
+Investments
+
+Debt
+
+Cash Flow
+
+Financial Health Score
+
+Retirement Progress
+
+Emergency Fund
+
+Investment Allocation
+
+Recent Activity
+
+Upcoming Goals
+
+AI Suggestions
+
+Everything animated.
+
+========================================
+PREMIUM USER EXPERIENCE
+========================================
+
+4K Quality
+
+Ultra HD
+
+Luxury SaaS
+
+Glassmorphism
+
+Dynamic gradients
+
+Premium typography
+
+Interactive charts
+
+Animated counters
+
+Soft shadows
+
+Smooth transitions
+
+Micro animations
+
+Mouse lighting effect
+
+Floating particles
+
+Professional icons
+
+Dark luxury interface
+
+Responsive on every device
+
+========================================
+SECURITY
+========================================
+
+Encrypt sensitive information.
+
+Validate every calculation.
+
+Prevent invalid inputs.
+
+Secure sessions.
+
+Cloud backup.
+
+Automatic saving.
+
+========================================
+SEO
+========================================
+
+Every calculator must have its own SEO page.
+
+Generate:
+
+Title
+
+Meta Description
+
+Structured Data
+
+Open Graph
+
+Twitter Cards
+
+Fast loading
+
+Schema.org
+
+Canonical URLs
+
+Internal linking
+
+Perfect Lighthouse score.
+
+========================================
+PERFORMANCE
+========================================
+
+Lazy Loading
+
+Caching
+
+Optimized Images
+
+Code Splitting
+
+Responsive Design
+
+Accessibility
+
+Offline Support
+
+PWA Ready
+
+========================================
+FINAL OBJECTIVE
+========================================
+
+Do not build another calculator website.
+
+Build an AI Financial Operating System.
+
+When users enter the platform, they should immediately feel they are using one of the most advanced financial applications in the world.
+
+Every calculator must work perfectly.
+
+Every result must be accurate.
+
+Every calculation must be saved to the user's account.
+
+Every recommendation must be generated by the AI assistant.
+
+Every section must feel premium, intelligent, trustworthy and world-class.
