@@ -1,10 +1,13 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@/lib/useAuth";
 import HomePage from "@/pages/HomePage";
 import CalculatorPage from "@/pages/CalculatorPage";
 import MarketDataPage from "@/pages/MarketDataPage";
 import DashboardPage from "@/pages/DashboardPage";
 import CoachPage from "@/pages/CoachPage";
+import AiAdvisorPage from "@/pages/AiAdvisorPage";
+import ProfilePage from "@/pages/ProfilePage";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -17,6 +20,8 @@ function Router() {
       <Route path="/market" component={MarketDataPage} />
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/coach" component={CoachPage} />
+      <Route path="/advisor" component={AiAdvisorPage} />
+      <Route path="/profile" component={ProfilePage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -25,9 +30,11 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <Router />
-      </WouterRouter>
+      <AuthProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <Router />
+        </WouterRouter>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

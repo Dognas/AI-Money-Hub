@@ -10,13 +10,20 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: Auth
+    description: Browser and mobile authentication endpoints.
+  - name: profile
+    description: User profile operations
+  - name: calcHistory
+    description: Calculator history operations
+  - name: ai
+    description: AI advisor operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,7 +31,294 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/user:
+    get:
+      tags: [Auth]
+      operationId: getCurrentAuthUser
+      summary: Get the currently authenticated user
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+      responses:
+        '200':
+          description: Auth status resolved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthUserEnvelope'
+  /login:
+    get:
+      tags: [Auth]
+      operationId: beginBrowserLogin
+      summary: Start the browser OIDC login flow
+      parameters:
+        - name: returnTo
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to the OIDC authorization endpoint.
+  /callback:
+    get:
+      tags: [Auth]
+      operationId: handleBrowserLoginCallback
+      summary: Complete the browser OIDC login flow
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: iss
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uri
+      responses:
+        '302':
+          description: Redirect on success or failure.
+  /logout:
+    get:
+      tags: [Auth]
+      operationId: logoutBrowserSession
+      summary: Clear the session and begin OIDC logout
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+        - $ref: '#/components/parameters/SessionCookie'
+      responses:
+        '302':
+          description: Redirect to the OIDC provider logout URL.
+  /mobile-auth/token-exchange:
+    post:
+      tags: [Auth]
+      operationId: exchangeMobileAuthorizationCode
+      summary: Exchange a mobile OIDC code for a session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobileTokenExchangeRequest'
+      responses:
+        '200':
+          description: Session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileTokenExchangeSuccess'
+        '400':
+          description: Missing or invalid required fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Token did not contain usable claims.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Token exchange failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /mobile-auth/logout:
+    post:
+      tags: [Auth]
+      operationId: logoutMobileSession
+      summary: Delete a mobile session token
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationSessionHeader'
+      responses:
+        '200':
+          description: Logout processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutSuccess'
+
+  /profile:
+    get:
+      tags: [profile]
+      operationId: getProfile
+      summary: Get current user profile
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    put:
+      tags: [profile]
+      operationId: upsertProfile
+      summary: Create or update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertProfileBody'
+      responses:
+        '200':
+          description: Profile saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /calc-history:
+    get:
+      tags: [calcHistory]
+      operationId: listCalcHistory
+      summary: List recent calculator history for current user
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: History list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CalcHistoryItem'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    post:
+      tags: [calcHistory]
+      operationId: saveCalcResult
+      summary: Save a calculator result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveCalcResultBody'
+      responses:
+        '201':
+          description: Saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalcHistoryItem'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /ai/chat:
+    post:
+      tags: [ai]
+      operationId: sendAiMessage
+      summary: Send a message to the AI financial advisor (streaming SSE)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiChatBody'
+      responses:
+        '200':
+          description: SSE stream
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /ai/conversation:
+    get:
+      tags: [ai]
+      operationId: getAiConversation
+      summary: Get the current user's AI conversation history
+      responses:
+        '200':
+          description: Conversation history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiConversationResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+    delete:
+      tags: [ai]
+      operationId: clearAiConversation
+      summary: Clear the current user's AI conversation
+      responses:
+        '200':
+          description: Cleared
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutSuccess'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
 components:
+  parameters:
+    AuthorizationSessionHeader:
+      name: Authorization
+      in: header
+      required: false
+      description: Opaque session token — `Bearer <sid>`.
+      schema:
+        type: string
+    SessionCookie:
+      name: sid
+      in: cookie
+      required: false
+      description: Browser session cookie.
+      schema:
+        type: string
   schemas:
     HealthStatus:
       type: object
@@ -34,3 +328,198 @@ components:
       required:
         - status
 
+    AuthUser:
+      type: object
+      required: [id, email, firstName, lastName, profileImageUrl]
+      properties:
+        id:
+          type: string
+        email:
+          type: [string, 'null']
+          format: email
+        firstName:
+          type: [string, 'null']
+        lastName:
+          type: [string, 'null']
+        profileImageUrl:
+          type: [string, 'null']
+    AuthUserEnvelope:
+      type: object
+      required: [user]
+      properties:
+        user:
+          oneOf:
+            - $ref: '#/components/schemas/AuthUser'
+            - type: 'null'
+    MobileTokenExchangeRequest:
+      type: object
+      required: [code, code_verifier, redirect_uri, state]
+      properties:
+        code:
+          type: string
+          minLength: 1
+        code_verifier:
+          type: string
+          minLength: 1
+        redirect_uri:
+          type: string
+          minLength: 1
+          format: uri
+        state:
+          type: string
+          minLength: 1
+        nonce:
+          type: string
+          minLength: 1
+    MobileTokenExchangeSuccess:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+    LogoutSuccess:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+          const: true
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    UserProfile:
+      type: object
+      required: [id]
+      properties:
+        id:
+          type: string
+        age:
+          type: [integer, 'null']
+        country:
+          type: [string, 'null']
+        currency:
+          type: [string, 'null']
+        monthlyIncome:
+          type: [number, 'null']
+        monthlyExpenses:
+          type: [number, 'null']
+        monthlySavings:
+          type: [number, 'null']
+        totalDebt:
+          type: [number, 'null']
+        totalSavings:
+          type: [number, 'null']
+        totalInvestments:
+          type: [number, 'null']
+        retirementAge:
+          type: [integer, 'null']
+        riskTolerance:
+          type: [string, 'null']
+        financialGoal:
+          type: [string, 'null']
+        healthScore:
+          type: [integer, 'null']
+
+    UpsertProfileBody:
+      type: object
+      properties:
+        age:
+          type: integer
+        country:
+          type: string
+        currency:
+          type: string
+        monthlyIncome:
+          type: number
+        monthlyExpenses:
+          type: number
+        monthlySavings:
+          type: number
+        totalDebt:
+          type: number
+        totalSavings:
+          type: number
+        totalInvestments:
+          type: number
+        retirementAge:
+          type: integer
+        riskTolerance:
+          type: string
+        financialGoal:
+          type: string
+        healthScore:
+          type: integer
+
+    CalcHistoryItem:
+      type: object
+      required: [id, userId, calcId, calcName, inputs, results, isFavorite, createdAt]
+      properties:
+        id:
+          type: integer
+        userId:
+          type: string
+        calcId:
+          type: string
+        calcName:
+          type: string
+        inputs:
+          type: object
+          additionalProperties: true
+        results:
+          type: object
+          additionalProperties: true
+        isFavorite:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    SaveCalcResultBody:
+      type: object
+      required: [calcId, calcName, inputs, results]
+      properties:
+        calcId:
+          type: string
+        calcName:
+          type: string
+        inputs:
+          type: object
+          additionalProperties: true
+        results:
+          type: object
+          additionalProperties: true
+        isFavorite:
+          type: string
+
+    AiChatBody:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+          minLength: 1
+        conversationId:
+          type: [integer, 'null']
+
+    AiConversationResponse:
+      type: object
+      required: [messages]
+      properties:
+        conversationId:
+          type: [integer, 'null']
+        messages:
+          type: array
+          items:
+            type: object
+            required: [role, content, ts]
+            properties:
+              role:
+                type: string
+              content:
+                type: string
+              ts:
+                type: number
