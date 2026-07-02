@@ -58,14 +58,14 @@ function getSafeReturnTo(value: unknown): string {
 }
 
 async function upsertUser(claims: Record<string, unknown>) {
+  // Google's ID token uses given_name/family_name/picture rather than the
+  // first_name/last_name/profile_image_url claim names Replit's issuer used.
   const userData = {
     id: claims.sub as string,
     email: (claims.email as string) || null,
-    firstName: (claims.first_name as string) || null,
-    lastName: (claims.last_name as string) || null,
-    profileImageUrl: (claims.profile_image_url || claims.picture) as
-      | string
-      | null,
+    firstName: (claims.given_name as string) || null,
+    lastName: (claims.family_name as string) || null,
+    profileImageUrl: (claims.picture as string) || null,
   };
 
   const [user] = await db
@@ -103,10 +103,13 @@ router.get("/login", async (req: Request, res: Response) => {
 
   const redirectTo = oidc.buildAuthorizationUrl(config, {
     redirect_uri: callbackUrl,
-    scope: "openid email profile offline_access",
+    // Google doesn't have an "offline_access" scope; refresh tokens are
+    // requested via access_type=offline + prompt=consent instead.
+    scope: "openid email profile",
     code_challenge: codeChallenge,
     code_challenge_method: "S256",
-    prompt: "login consent",
+    access_type: "offline",
+    prompt: "consent",
     state,
     nonce,
   });
@@ -182,18 +185,13 @@ router.get("/callback", async (req: Request, res: Response) => {
 });
 
 router.get("/logout", async (req: Request, res: Response) => {
-  const config = await getOidcConfig();
+  // Google does not publish an end_session_endpoint (RP-Initiated Logout),
+  // so logout is local-only: clear our session and send the user home.
+  // This does not sign the user out of Google itself, only out of this app.
   const origin = getOrigin(req);
-
   const sid = getSessionId(req);
   await clearSession(res, sid);
-
-  const endSessionUrl = oidc.buildEndSessionUrl(config, {
-    client_id: process.env.REPL_ID!,
-    post_logout_redirect_uri: origin,
-  });
-
-  res.redirect(endSessionUrl.href);
+  res.redirect(origin);
 });
 
 router.post(

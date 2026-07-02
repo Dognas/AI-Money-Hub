@@ -5,7 +5,11 @@ import { db, sessionsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import type { User as AuthUser } from "@workspace/db";
 
-export const ISSUER_URL = process.env.ISSUER_URL ?? "https://replit.com/oidc";
+// Google OAuth / OIDC. Google's discovery document lives at accounts.google.com
+// and (unlike Replit's issuer) requires a confidential client, i.e. a client secret.
+export const ISSUER_URL = process.env.ISSUER_URL ?? "https://accounts.google.com";
+export const OAUTH_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? "";
+export const OAUTH_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET ?? "";
 export const SESSION_COOKIE = "sid";
 export const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
 
@@ -19,10 +23,17 @@ export interface SessionData {
 let oidcConfig: client.Configuration | null = null;
 
 export async function getOidcConfig(): Promise<client.Configuration> {
+  if (!OAUTH_CLIENT_ID || !OAUTH_CLIENT_SECRET) {
+    throw new Error(
+      "GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables are required but were not provided.",
+    );
+  }
+
   if (!oidcConfig) {
     oidcConfig = await client.discovery(
       new URL(ISSUER_URL),
-      process.env.REPL_ID!,
+      OAUTH_CLIENT_ID,
+      { client_secret: OAUTH_CLIENT_SECRET },
     );
   }
   return oidcConfig;

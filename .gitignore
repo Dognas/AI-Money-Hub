@@ -47,3 +47,21 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+.replit-artifact/
+
+# Environment variables — never commit real secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Build output that isn't checked in
+/artifacts/*/dist
+/lib/*/dist
+
+# OS
+*.pem
