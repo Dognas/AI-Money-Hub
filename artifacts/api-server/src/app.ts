@@ -35,7 +35,27 @@ app.use(
     },
   }),
 );
-app.use(cors({ credentials: true, origin: true }));
+// In the merged single-process deployment (Hostinger) the frontend and API
+// share an origin, so credentialed cross-origin requests aren't needed there.
+// ALLOWED_ORIGINS still supports split deployments (e.g. a separate mobile
+// client or a staging frontend on another domain) via a comma-separated list.
+const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+// Outside production, fall back to reflecting any origin (matches the old
+// behavior) so the separate Vite dev server (a different port = different
+// origin) keeps working without extra setup. In production, no origins are
+// allowed unless explicitly configured via ALLOWED_ORIGINS.
+const corsOrigin =
+  allowedOrigins.length > 0
+    ? allowedOrigins
+    : process.env.NODE_ENV === "production"
+      ? false
+      : true;
+
+app.use(cors({ credentials: true, origin: corsOrigin }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
