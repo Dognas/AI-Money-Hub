@@ -4,13 +4,13 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-const rawPort = process.env.PORT;
-
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
+// Defaults, not hard requirements: dev/preview use PORT for the local server
+// address, and the production build only actually needs BASE_PATH (baked
+// into asset URLs). build:hostinger sets both explicitly, but any other
+// build invocation (e.g. a plain "npm run build" that recurses through every
+// workspace) shouldn't crash the whole pipeline over a value the build step
+// doesn't use for anything but binding a dev server.
+const rawPort = process.env.PORT ?? "3000";
 
 const port = Number(rawPort);
 
@@ -18,13 +18,7 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    "BASE_PATH environment variable is required but was not provided.",
-  );
-}
+const basePath = process.env.BASE_PATH ?? "/";
 
 export default defineConfig({
   base: basePath,
