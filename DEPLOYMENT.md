@@ -20,18 +20,20 @@ This app deploys as a **single Node.js process** that serves both the API (under
 In hPanel → Node.js Hosting → your app → **Git**, connect the GitHub repository and branch (`main`). Hostinger will pull on each deploy/push.
 
 - **Application startup file:** `artifacts/api-server/dist/index.mjs`
-- **Install command:** `corepack enable && pnpm install --frozen-lockfile`
-- **Build command:** `pnpm run build:hostinger`
-- **Start command:** `pnpm run start` (equivalent to `node artifacts/api-server/dist/index.mjs`)
+- **Install command:** `corepack enable && npx pnpm install --frozen-lockfile`
+- **Build command:** `npm run build:hostinger`
+- **Start command:** `npm run start` (equivalent to `node artifacts/api-server/dist/index.mjs` — no pnpm needed at runtime)
 
 If Hostinger's Node app UI requires a single install/build/start rather than a full panel, use:
 
 ```bash
 corepack enable
-pnpm install --frozen-lockfile
-pnpm run build:hostinger
-pnpm run start
+npx pnpm install --frozen-lockfile
+npm run build:hostinger
+npm run start
 ```
+
+> **Why `npx pnpm` instead of `pnpm`:** Hostinger's build step runs in a shell where a globally-installed `pnpm` binary isn't guaranteed to be on `PATH`, even if the install step used it — each step can be a separate shell invocation. `npx pnpm` resolves and runs pnpm regardless, so this doesn't depend on how Hostinger wires its build pipeline. The root `package.json` scripts (`build`, `build:hostinger`, `typecheck`) all use `npx pnpm` internally for the same reason, and `start` avoids pnpm entirely by calling `node` directly.
 
 ## 4. Environment variables
 
