@@ -12,7 +12,27 @@ import { authMiddleware } from "./middlewares/authMiddleware";
 // After bundling, this file lives at dist/index.mjs, so the built frontend
 // (copied there by the root `build:hostinger` script) lives at dist/public.
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const clientDist = path.resolve(__dirname, "public");
+
+// Prefer the colocated copy (what build:hostinger produces), but fall back to
+// the frontend package's own Vite output directly. This matters because not
+// every host's build pipeline is guaranteed to run copy-client-dist.mjs (e.g.
+// an auto-detected/monorepo-recursive build step that builds each workspace
+// package independently) — without this fallback, a build that skips that
+// one script silently serves nothing and every route 404s ("Cannot GET /").
+const candidateClientDirs = [
+  path.resolve(__dirname, "public"),
+  path.resolve(__dirname, "../../ai-money-hub/dist/public"),
+];
+const clientDist = candidateClientDirs.find((dir) => existsSync(dir));
+
+if (!clientDist) {
+  // eslint-disable-next-line no-console
+  console.error(
+    "[static] No built frontend found in any of:",
+    candidateClientDirs,
+    "- the API will still work under /api/*, but no static frontend will be served.",
+  );
+}
 
 const app: Express = express();
 
@@ -64,10 +84,11 @@ app.use(authMiddleware);
 app.use("/api", router);
 
 // Serve the built frontend (single-process deployment, e.g. Hostinger Node
-// hosting). If dist/public doesn't exist (e.g. local API-only dev), skip
-// silently so `pnpm --filter api-server dev` keeps working against the
-// separate Vite dev server as before.
-if (existsSync(clientDist)) {
+// hosting). If neither candidate directory exists (e.g. local API-only dev,
+// or the frontend genuinely wasn't built), skip silently so
+// `pnpm --filter api-server dev` keeps working against the separate Vite
+// dev server as before.
+if (clientDist) {
   app.use(express.static(clientDist));
 
   // Express 5's router (path-to-regexp v8) rejects a bare "*" pattern, so
