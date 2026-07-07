@@ -33,62 +33,99 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Rebind Tailwind's built-in emerald and green scales to the premium
+     neon-emerald hue (#00FFA3, hsl(156 100% 50%)) so every existing
+     emerald- and green- utility class across the app inherits the new
+     identity without editing each component individually. */
+  --color-emerald-50: hsl(156 100% 96%);
+  --color-emerald-100: hsl(156 90% 90%);
+  --color-emerald-200: hsl(156 85% 80%);
+  --color-emerald-300: hsl(156 90% 65%);
+  --color-emerald-400: hsl(156 100% 55%);
+  --color-emerald-500: hsl(156 100% 50%);
+  --color-emerald-600: hsl(156 90% 42%);
+  --color-emerald-700: hsl(156 85% 34%);
+  --color-emerald-800: hsl(156 75% 22%);
+  --color-emerald-900: hsl(156 65% 15%);
+  --color-emerald-950: hsl(156 60% 9%);
+  --color-green-400: hsl(156 100% 55%);
+  --color-green-500: hsl(156 100% 50%);
+  --color-green-600: hsl(156 90% 42%);
+
+  /* Rebind Tailwind's built-in gray scale to the obsidian/charcoal/off-white
+     neutrals so the ~500 existing gray-* classes across the app (bg-gray-800,
+     text-gray-400, border-gray-700, etc.) inherit the premium identity
+     instead of default Tailwind gray. */
+  --color-gray-50: hsl(240 9% 96%);
+  --color-gray-100: hsl(240 8% 90%);
+  --color-gray-200: hsl(240 7% 80%);
+  --color-gray-300: hsl(240 6% 68%);
+  --color-gray-400: hsl(240 5% 58%);
+  --color-gray-500: hsl(240 5% 48%);
+  --color-gray-600: hsl(240 5% 38%);
+  --color-gray-700: hsl(240 5% 22%);
+  --color-gray-800: hsl(240 5% 14%);
+  --color-gray-900: hsl(240 5% 8%);
+  --color-gray-950: hsl(240 6% 4%);
 }
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 9%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 9%;
-  --primary: 0 0% 13%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 13%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 13%;
-  --destructive: 0 84% 60%;
+  --background: 240 4% 4%;
+  --foreground: 240 9% 96%;
+  --card: 240 5% 8%;
+  --card-foreground: 240 9% 96%;
+  --popover: 240 5% 8%;
+  --popover-foreground: 240 9% 96%;
+  --primary: 46 65% 52%;
+  --primary-foreground: 240 8% 6%;
+  --secondary: 240 5% 13%;
+  --secondary-foreground: 240 9% 96%;
+  --muted: 240 5% 13%;
+  --muted-foreground: 240 5% 63%;
+  --accent: 156 100% 50%;
+  --accent-foreground: 240 8% 6%;
+  --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 91%;
-  --input: 0 0% 91%;
-  --ring: 160 84% 39%;
-  --chart-1: 160 84% 39%;
-  --chart-2: 180 70% 40%;
-  --chart-3: 200 70% 50%;
-  --chart-4: 240 70% 60%;
-  --chart-5: 280 70% 55%;
-  --radius: 0.625rem;
+  --border: 240 9% 96% / 8%;
+  --input: 240 9% 96% / 10%;
+  --ring: 46 65% 52%;
+  --chart-1: 46 65% 52%;
+  --chart-2: 156 100% 50%;
+  --chart-3: 200 70% 60%;
+  --chart-4: 280 70% 65%;
+  --chart-5: 340 70% 60%;
+  --radius: 0.75rem;
   --app-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --gold: 46 65% 52%;
+  --neon-emerald: 156 100% 50%;
 }
 
 .dark {
-  --background: 222 47% 4%;
-  --foreground: 0 0% 98%;
-  --card: 222 47% 8%;
-  --card-foreground: 0 0% 98%;
-  --popover: 222 47% 8%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 91%;
-  --primary-foreground: 0 0% 13%;
-  --secondary: 222 47% 13%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 222 47% 13%;
-  --muted-foreground: 0 0% 63%;
-  --accent: 222 47% 13%;
-  --accent-foreground: 0 0% 98%;
+  --background: 240 4% 4%;
+  --foreground: 240 9% 96%;
+  --card: 240 5% 8%;
+  --card-foreground: 240 9% 96%;
+  --popover: 240 5% 8%;
+  --popover-foreground: 240 9% 96%;
+  --primary: 46 65% 52%;
+  --primary-foreground: 240 8% 6%;
+  --secondary: 240 5% 13%;
+  --secondary-foreground: 240 9% 96%;
+  --muted: 240 5% 13%;
+  --muted-foreground: 240 5% 63%;
+  --accent: 156 100% 50%;
+  --accent-foreground: 240 8% 6%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 100% / 10%;
-  --input: 0 0% 100% / 15%;
-  --ring: 160 84% 50%;
-  --chart-1: 160 84% 50%;
-  --chart-2: 180 70% 50%;
+  --border: 240 9% 96% / 8%;
+  --input: 240 9% 96% / 10%;
+  --ring: 46 65% 52%;
+  --chart-1: 46 65% 52%;
+  --chart-2: 156 100% 50%;
   --chart-3: 200 70% 60%;
-  --chart-4: 240 70% 65%;
-  --chart-5: 280 70% 60%;
+  --chart-4: 280 70% 65%;
+  --chart-5: 340 70% 60%;
 }
 
 @layer base {
@@ -100,23 +137,58 @@
   }
 }
 
-/* ───── Design utilities from original ───── */
+/* ───── Premium design system: obsidian + champagne gold + neon emerald ───── */
 
 .gradient-text {
-  background: linear-gradient(135deg, #34d399 0%, #2dd4bf 50%, #10b981 100%);
+  background: linear-gradient(135deg, #e5c158 0%, #d4af37 50%, #00ffa3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .btn-gradient {
-  background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%);
+  color: #0b0b0c;
+  transition: all 300ms ease;
+}
+.btn-gradient:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 32px 0 rgba(212, 175, 55, 0.35);
 }
 
 .badge-glow {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.3);
-  color: #10b981;
+  background: rgba(0, 255, 163, 0.08);
+  border-color: rgba(0, 255, 163, 0.3);
+  color: #00ffa3;
+}
+
+/* Glassmorphism surface: ultra-thin border, subtle blur, low-opacity fill */
+.glass-card {
+  background: rgba(22, 22, 24, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 245, 247, 0.08);
+  transition: all 300ms ease;
+}
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+/* Ambient premium glow, sits behind an element via position:relative + ::before,
+   or apply directly to a wrapping div for a soft halo behind cards/CTAs */
+.glow-gold {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.12), 0 8px 40px -8px rgba(212, 175, 55, 0.25);
+}
+.glow-emerald {
+  box-shadow: 0 0 0 1px rgba(0, 255, 163, 0.12), 0 8px 40px -8px rgba(0, 255, 163, 0.22);
+}
+
+/* Default premium micro-interaction timing for interactive elements */
+.interactive {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.interactive:hover {
+  transform: translateY(-1px);
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }

@@ -1,15 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 type ThemeCtx = { dark: boolean; toggle: () => void };
-const Ctx = createContext<ThemeCtx>({ dark: false, toggle: () => {} });
+const Ctx = createContext<ThemeCtx>({ dark: true, toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(() => {
     try {
       const stored = localStorage.getItem("theme");
       if (stored) return stored === "dark";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    } catch { return false; }
+      // AI Money Hub's premium identity is a single committed obsidian look,
+      // not a system-preference toggle — default to it for every new visitor.
+      return true;
+    } catch { return true; }
   });
 
   useEffect(() => {

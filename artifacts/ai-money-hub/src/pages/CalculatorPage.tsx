@@ -131,7 +131,7 @@ function CalculatorContent() {
           {/* Calculator Panel */}
           <div className="lg:col-span-2 space-y-4">
             {/* Header */}
-            <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100 shadow-sm"}`}>
+            <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "glass-card glow-gold" : "bg-white border-gray-100 shadow-sm"}`}>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">{tool.icon}</span>
@@ -148,7 +148,7 @@ function CalculatorContent() {
             </div>
 
             {/* Fields */}
-            <div className={`rounded-2xl border p-5 sm:p-6 space-y-4 ${dark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100 shadow-sm"}`}>
+            <div className={`rounded-2xl border p-5 sm:p-6 space-y-4 ${dark ? "glass-card" : "bg-white border-gray-100 shadow-sm"}`}>
               <h2 className={`font-bold text-sm ${dark ? "text-gray-300" : "text-gray-700"}`}>Input Values</h2>
               {calc.fields.map(field => (
                 <FieldInput
@@ -175,7 +175,7 @@ function CalculatorContent() {
             )}
 
             {/* All Results */}
-            <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100 shadow-sm"}`}>
+            <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "glass-card" : "bg-white border-gray-100 shadow-sm"}`}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className={`font-bold ${dark ? "text-white" : "text-gray-900"}`}>Results</h2>
                 <div className="flex gap-2">
@@ -207,7 +207,7 @@ function CalculatorContent() {
 
             {/* Chart */}
             {chartData && chartData.length > 1 && (
-              <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100 shadow-sm"}`}>
+              <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? "glass-card" : "bg-white border-gray-100 shadow-sm"}`}>
                 <h2 className={`font-bold mb-4 ${dark ? "text-white" : "text-gray-900"}`}>📈 Growth Chart</h2>
                 <ResponsiveContainer width="100%" height={260}>
                   <AreaChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -238,7 +238,7 @@ function CalculatorContent() {
             )}
 
             {/* Share Results */}
-            <div className={`rounded-2xl border p-4 flex flex-wrap gap-3 ${dark ? "bg-gray-900 border-gray-800" : "bg-white border-gray-100 shadow-sm"}`}>
+            <div className={`rounded-2xl border p-4 flex flex-wrap gap-3 ${dark ? "glass-card" : "bg-white border-gray-100 shadow-sm"}`}>
               <span className={`text-sm font-semibold ${dark ? "text-gray-300" : "text-gray-700"}`}>Share results:</span>
               <button onClick={handleCopy} className="text-sm text-emerald-500 hover:text-emerald-600 font-medium transition-colors">📋 Copy to clipboard</button>
               <button onClick={handlePrint} className="text-sm text-emerald-500 hover:text-emerald-600 font-medium transition-colors no-print">🖨️ Print / Save PDF</button>

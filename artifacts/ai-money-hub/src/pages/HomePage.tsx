@@ -46,7 +46,7 @@ function SearchBar() {
 
   return (
     <div className="relative max-w-2xl mx-auto">
-      <div className={`flex items-center rounded-2xl border-2 px-5 py-4 shadow-lg transition-all duration-300 ${focused ? "border-emerald-400 shadow-emerald-100" : dark ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-white"}`}>
+      <div className={`flex items-center rounded-2xl border-2 px-5 py-4 shadow-lg transition-all duration-300 ${focused ? "border-emerald-400 shadow-emerald-100" : dark ? "glass-card glow-gold border-2" : "border-gray-200 bg-white"}`}>
         <svg className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
@@ -176,7 +176,7 @@ function HomeContent() {
             </div>
 
             {/* Dashboard Preview */}
-            <div className={`rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden max-w-4xl mx-auto ${dark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}`}>
+            <div className={`rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden max-w-4xl mx-auto ${dark ? "glass-card glow-emerald" : "bg-white border-gray-200"}`}>
               <div className={`flex items-center gap-2 px-4 sm:px-5 py-3 border-b ${dark ? "border-gray-800 bg-gray-900" : "border-gray-100 bg-gray-50"}`}>
                 <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-400"/><div className="w-3 h-3 rounded-full bg-amber-400"/><div className="w-3 h-3 rounded-full bg-green-400"/></div>
                 <span className={`text-xs ml-2 ${dark ? "text-gray-500" : "text-gray-400"}`}>ai-money-hub.com</span>
