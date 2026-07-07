@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aimoneyhub.com/sitemap.xml
+Sitemap: https://smartglowhub.fun/sitemap.xml

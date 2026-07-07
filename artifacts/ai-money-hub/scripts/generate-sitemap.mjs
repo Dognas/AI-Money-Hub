@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { categories } from "../src/data/calculators.ts";
 
-const SITE_URL = process.env.SITE_URL ?? "https://aimoneyhub.com";
+const SITE_URL = process.env.SITE_URL ?? "https://smartglowhub.fun";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.resolve(__dirname, "../public/sitemap.xml");
