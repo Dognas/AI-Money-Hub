@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
+import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { ThemeProvider, useTheme } from "@/lib/useTheme";
 import { allTools } from "@/data/calculators";
 import { getRecent, getFavorites, toggleFavorite } from "@/lib/favorites";
@@ -162,6 +163,11 @@ function DashboardContent() {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Sponsored slot: inert until confirmed Banner/Native ad script wired in */}
+        <div className="mt-8">
+          <SponsoredSlot />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
+import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { ThemeProvider, useTheme } from "@/lib/useTheme";
 import { useAuth } from "@/lib/useAuth";
 import { aiApi, profileApi, type AiMessage, type UserProfile } from "@/lib/api";
@@ -297,6 +298,11 @@ function AdvisorContent() {
             </div>
           </div>
         )}
+
+        {/* Sponsored slot: inert until confirmed Banner/Native ad script wired in */}
+        <div className="mt-6">
+          <SponsoredSlot />
+        </div>
       </div>
     </div>
   );

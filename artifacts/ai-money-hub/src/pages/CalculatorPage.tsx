@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "wouter";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import Navbar from "@/components/Navbar";
+import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { ThemeProvider, useTheme } from "@/lib/useTheme";
 import { calculators, type Field } from "@/lib/calc-engine";
 import { allTools } from "@/data/calculators";
@@ -262,6 +263,12 @@ function CalculatorContent() {
             </div>
           </div>
         )}
+
+        {/* Sponsored slot: inert until a confirmed Banner/Native ad script
+            is wired in via scriptSrc/zoneId — see SponsoredSlot.tsx */}
+        <div className="mt-8">
+          <SponsoredSlot />
+        </div>
       </div>
     </div>
   );
