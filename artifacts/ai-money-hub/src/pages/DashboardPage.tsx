@@ -167,7 +167,7 @@ function DashboardContent() {
 
         {/* Sponsored slot: inert until confirmed Banner/Native ad script wired in */}
         <div className="mt-8">
-          <SponsoredSlot />
+          <SponsoredSlot adcashZoneId="11635502" />
         </div>
       </div>
     </div>

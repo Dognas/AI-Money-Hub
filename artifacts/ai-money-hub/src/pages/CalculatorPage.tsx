@@ -267,7 +267,7 @@ function CalculatorContent() {
         {/* Sponsored slot: inert until a confirmed Banner/Native ad script
             is wired in via scriptSrc/zoneId — see SponsoredSlot.tsx */}
         <div className="mt-8">
-          <SponsoredSlot />
+          <SponsoredSlot adcashZoneId="11635502" />
         </div>
       </div>
     </div>

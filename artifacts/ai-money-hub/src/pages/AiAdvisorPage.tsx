@@ -301,7 +301,7 @@ function AdvisorContent() {
 
         {/* Sponsored slot: inert until confirmed Banner/Native ad script wired in */}
         <div className="mt-6">
-          <SponsoredSlot />
+          <SponsoredSlot adcashZoneId="11635502" />
         </div>
       </div>
     </div>
