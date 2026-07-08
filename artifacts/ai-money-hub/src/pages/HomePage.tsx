@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
+import { SponsoredSlot } from "@/components/SponsoredSlot";
 import { ThemeProvider, useTheme } from "@/lib/useTheme";
 import { categories, allTools, testimonials } from "@/data/calculators";
 
@@ -323,6 +324,11 @@ function HomeContent() {
           </div>
         </div>
       </section>
+
+      {/* Sponsored slot: second banner position (Adcash Display zone 11635538) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-8">
+        <SponsoredSlot adcashZoneId="11635538" />
+      </div>
 
       {/* Footer */}
       <footer className={`border-t py-8 ${dark ? "bg-gray-950 border-gray-800" : "bg-white border-gray-100"}`}>
