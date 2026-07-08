@@ -26,5 +26,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Adcash SDK loader only - defines window.aclib but renders nothing on
+         its own. The actual Display ad call goes through SponsoredSlot once
+         the zone-specific snippet (aclib.runDisplay({ zoneId: ... }) or
+         equivalent) is confirmed. Never call aclib.runAutoTag() here. -->
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
   </body>
 </html>
