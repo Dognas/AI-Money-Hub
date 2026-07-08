@@ -1,10 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { useTheme } from "@/lib/useTheme";
-import { useAuth } from "@/lib/useAuth";
 
 export default function Navbar() {
   const { dark, toggle } = useTheme();
-  const { user, isAuthenticated, login, logout } = useAuth();
   const [location] = useLocation();
 
   const navLinks = [
@@ -48,28 +46,6 @@ export default function Navbar() {
           >
             {dark ? "☀️" : "🌙"}
           </button>
-
-          {isAuthenticated ? (
-            <Link href="/profile" className="flex items-center gap-2 flex-shrink-0">
-              {user?.profileImageUrl ? (
-                <img src={user.profileImageUrl} alt="Profile" className="w-8 h-8 rounded-xl object-cover border-2 border-emerald-400/40" />
-              ) : (
-                <div className="w-8 h-8 rounded-xl btn-gradient flex items-center justify-center text-white text-xs font-black">
-                  {user?.firstName?.[0] ?? "U"}
-                </div>
-              )}
-              <span className={`text-sm font-semibold hidden sm:block ${dark ? "text-gray-200" : "text-gray-700"}`}>
-                {user?.firstName ?? "Profile"}
-              </span>
-            </Link>
-          ) : (
-            <button
-              onClick={login}
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white px-3 sm:px-4 py-2 rounded-xl transition-all hover:opacity-90 btn-gradient"
-            >
-              Sign In
-            </button>
-          )}
         </div>
       </div>
 
@@ -88,13 +64,6 @@ export default function Navbar() {
             {label}
           </Link>
         ))}
-        {isAuthenticated && (
-          <Link href="/profile" className={`flex-shrink-0 text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
-            location === "/profile" ? "text-white btn-gradient" : dark ? "text-gray-400 bg-gray-800" : "text-gray-600 bg-gray-100"
-          }`}>
-            👤 {user?.firstName ?? "Profile"}
-          </Link>
-        )}
       </div>
     </nav>
   );
